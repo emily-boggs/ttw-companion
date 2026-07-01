@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Home, CalendarHeart, Calendar, MessageCircle } from 'lucide-react';
 import { useTWW } from '../context/TWWContext';
 
 export default function AppLayout({ children }) {
@@ -14,8 +15,10 @@ export default function AppLayout({ children }) {
   }
 
   const navItems = [
-    { path: '/timeline', label: 'Timeline', emoji: '📅' },
-    { path: '/log', label: 'Log', emoji: '📝' },
+    { path: '/home', label: 'Home', icon: Home },
+    { path: '/today', label: 'Today', icon: CalendarHeart },
+    { path: '/timeline', label: 'Timeline', icon: Calendar },
+    { path: '/chat', label: 'Chat', icon: MessageCircle },
   ];
 
   return (
@@ -23,17 +26,19 @@ export default function AppLayout({ children }) {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex md:flex-col md:w-64 lg:w-72 md:fixed md:inset-y-0 md:left-0 bg-white border-r border-gray-100 px-5 py-8">
         {/* Logo / Title */}
-        <div className="mb-8">
+        <button onClick={() => navigate('/home')} className="mb-8 text-left">
           <h2 className="font-serif text-xl font-bold">TWW Companion</h2>
-          {currentDPO && (
-            <p className="text-sm text-text-muted mt-1">DPO {Math.min(currentDPO, 14)}</p>
+          {currentDPO != null && (
+            <p className="text-sm text-text-muted mt-1">DPO {Math.min(Math.max(currentDPO, 1), 14)}</p>
           )}
-        </div>
+        </button>
 
         {/* Nav Links */}
-        <nav className="flex flex-col gap-2 flex-1">
+        <nav className="flex flex-col gap-1 flex-1">
           {navItems.map((item) => {
-            const isActive = location.pathname.startsWith(item.path);
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path || 
+              (item.path === '/timeline' && location.pathname.startsWith('/day/'));
             return (
               <button
                 key={item.path}
@@ -44,7 +49,7 @@ export default function AppLayout({ children }) {
                     : 'text-text-muted hover:bg-surface'
                 }`}
               >
-                <span className="text-lg">{item.emoji}</span>
+                <Icon className="w-5 h-5" />
                 <span className="text-sm">{item.label}</span>
               </button>
             );
@@ -97,19 +102,21 @@ export default function AppLayout({ children }) {
       </main>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm border-t border-gray-100 px-5 py-3 flex justify-around z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 px-4 py-2 flex justify-around z-50">
         {navItems.map((item) => {
-          const isActive = location.pathname.startsWith(item.path);
+          const Icon = item.icon;
+          const isActive = location.pathname === item.path ||
+            (item.path === '/timeline' && location.pathname.startsWith('/day/'));
           return (
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center gap-1 min-h-[44px] min-w-[44px] justify-center ${
+              className={`flex flex-col items-center gap-0.5 min-h-[48px] min-w-[48px] justify-center rounded-xl px-2 transition-all ${
                 isActive ? 'text-primary-dark' : 'text-text-muted'
               }`}
             >
-              <span className="text-lg">{item.emoji}</span>
-              <span className="text-xs font-medium">{item.label}</span>
+              <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5px]' : ''}`} />
+              <span className="text-[10px] font-medium">{item.label}</span>
             </button>
           );
         })}

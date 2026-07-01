@@ -11,7 +11,7 @@ export default function Landing() {
     e.preventDefault();
     if (date) {
       setOvulationDate(date);
-      navigate('/timeline');
+      navigate('/home');
     }
   };
 
