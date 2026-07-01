@@ -1,0 +1,91 @@
+import { useParams, useNavigate } from 'react-router-dom';
+import { dpoContent } from '../data/dpoContent';
+import { getTestReliability } from '../lib/testReliability';
+import { useTWW } from '../context/TWWContext';
+
+export default function DayDetail() {
+  const { dpo } = useParams();
+  const navigate = useNavigate();
+  const { currentDPO } = useTWW();
+  const dayNum = parseInt(dpo, 10);
+  const content = dpoContent[dayNum];
+  const testInfo = getTestReliability(dayNum);
+
+  if (!content) {
+    navigate('/timeline');
+    return null;
+  }
+
+  const isToday = dayNum === currentDPO;
+  const savedSymptoms = localStorage.getItem(`tww-symptoms-dpo-${dayNum}`);
+  const symptoms = savedSymptoms ? JSON.parse(savedSymptoms) : null;
+
+  return (
+    <div className="min-h-screen px-5 py-6 max-w-md mx-auto">
+      {/* Back button */}
+      <button
+        onClick={() => navigate('/timeline')}
+        className="flex items-center gap-2 text-text-muted text-sm mb-6 active:opacity-70"
+      >
+        ← Back to timeline
+      </button>
+
+      {/* Day header */}
+      <div className="text-center mb-6">
+        <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full mb-3 ${
+          isToday ? 'bg-primary text-white' : 'bg-surface text-text'
+        }`}>
+          <span className="text-xl font-bold">{dayNum}</span>
+        </div>
+        <h1 className="font-serif text-2xl font-bold">
+          {content.title}
+        </h1>
+        <p className="text-sm text-text-muted mt-1">DPO {dayNum} • {content.keyEvent}</p>
+      </div>
+
+      {/* Body Guide */}
+      <div className="bg-surface rounded-2xl p-5 mb-4">
+        <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">What's Happening</h2>
+        <p className="text-base leading-relaxed">
+          {content.body}
+        </p>
+      </div>
+
+      {/* Test Indicator */}
+      <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor}`}>
+        <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">Should I Test?</h2>
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{testInfo.icon}</span>
+          <p className={`text-sm font-medium ${testInfo.color}`}>
+            {testInfo.message}
+          </p>
+        </div>
+      </div>
+
+      {/* Symptoms logged */}
+      {symptoms && (
+        <div className="bg-white border border-gray-100 rounded-2xl p-4 mb-4">
+          <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">You Logged</h2>
+          <div className="flex flex-wrap gap-2">
+            {symptoms.selected && symptoms.selected.map((s) => (
+              <span key={s} className="bg-secondary/30 text-sm px-3 py-1 rounded-full">
+                {s}
+              </span>
+            ))}
+          </div>
+          {symptoms.note && (
+            <p className="text-sm text-text-muted mt-3 italic">"{symptoms.note}"</p>
+          )}
+        </div>
+      )}
+
+      {/* Log CTA */}
+      <button
+        onClick={() => navigate(`/log?day=${dayNum}`)}
+        className="w-full py-4 bg-cta text-white font-semibold rounded-full text-base hover:opacity-90 active:scale-[0.98] transition-all min-h-[48px]"
+      >
+        {symptoms ? 'Edit Today\'s Log' : 'Log How You\'re Feeling'}
+      </button>
+    </div>
+  );
+}

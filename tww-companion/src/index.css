@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Nunito", sans-serif;
+
+  --color-primary: #C4B5FD;
+  --color-primary-dark: #8B5CF6;
+  --color-secondary: #FBCFE8;
+  --color-accent: #FDE68A;
+  --color-surface: #FAFAFA;
+  --color-cta: #1F2937;
+  --color-text: #1F2937;
+  --color-text-muted: #6B7280;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
