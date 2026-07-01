@@ -22,112 +22,124 @@ export default function Home() {
   const phase = getPhase(clampedDPO);
 
   return (
-    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
-      {/* Decorative elements */}
-      <div className="absolute top-10 right-6 w-10 h-10 bg-accent rounded-full opacity-40" />
-      <div className="absolute top-32 left-4 w-6 h-6 bg-secondary rounded-full opacity-30" />
-      <svg className="absolute top-16 right-20 w-4 h-4 text-primary opacity-50" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
-      </svg>
+    <div className="min-h-screen pb-24 md:pb-8">
+      {/* Full-bleed Hero */}
+      <div className="relative bg-pink-400 overflow-hidden px-6 pt-10 pb-24 md:px-12 md:pt-14 md:pb-28">
+        {/* Decorative circles */}
+        <div className="absolute -top-6 right--4 w-32 h-32 bg-amber-300/60 rounded-full" />
+        <div className="absolute top-1/2 -left-10 w-28 h-28 bg-violet-300/50 rounded-full" />
+        <div className="absolute bottom-16 left-16 w-4 h-4 bg-cyan-300 rounded-full" />
+        <div className="absolute top-20 right-1/3 w-3 h-3 bg-pink-200 rounded-full" />
 
-      {/* Cozy Hero Card */}
-      <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl p-6 mb-6 relative z-10 overflow-hidden">
-        {/* Decorative shapes inside card */}
-        <div className="absolute top-3 right-4 w-16 h-16 bg-accent/20 rounded-full" />
-        <div className="absolute bottom-2 left-6 w-8 h-8 bg-primary/15 rounded-full" />
-        <svg className="absolute top-5 right-20 w-4 h-4 text-primary/30" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
+        {/* Sparkle icons */}
+        <svg className="absolute top-8 left-16 w-5 h-5 text-amber-200/80" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
+        </svg>
+        <svg className="absolute bottom-20 right-12 w-6 h-6 text-indigo-500/70" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
+        </svg>
+        <svg className="absolute top-1/3 right-8 w-4 h-4 text-violet-400/60" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
         </svg>
 
-        <div className="relative">
-          <p className="text-sm text-text-muted font-medium mb-1">{phase.greeting}</p>
-          <h1 className="font-serif text-2xl md:text-3xl font-bold mb-2">
+        {/* Hero content */}
+        <div className="relative z-10 max-w-md">
+          <p className="text-white/80 text-sm font-medium mb-2">{phase.greeting}</p>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
             {phase.headline}
           </h1>
-          <p className="text-sm text-text-muted leading-relaxed mb-4">
+          <p className="text-white/80 text-base leading-relaxed max-w-sm">
             {phase.subtext}
           </p>
+        </div>
 
-          {/* DPO + Progress inline */}
+        {/* Wavy bottom edge */}
+        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="white" />
+        </svg>
+      </div>
+
+      {/* Content below hero */}
+      <div className="px-5 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto -mt-4">
+        {/* DPO badge + progress */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="bg-white rounded-full px-4 py-2 flex items-center gap-2 shadow-md border border-gray-100">
+            <Sparkles className="w-4 h-4 text-pink-400" />
+            <span className="text-sm font-bold">DPO {clampedDPO}</span>
+          </div>
+          <span className="text-xs text-text-muted">
+            {daysRemaining > 0
+              ? `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} to go`
+              : "Test day is here 🎉"}
+          </span>
+        </div>
+
+        {/* Progress bar */}
+        <div className="mb-6">
+          <div className="flex justify-between text-xs text-text-muted mb-2">
+            <span>Ovulation</span>
+            <span>Test Day</span>
+          </div>
+          <div className="h-2.5 bg-pink-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-pink-400 to-pink-500 rounded-full transition-all duration-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Test Indicator */}
+        <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor}`}>
           <div className="flex items-center gap-3">
-            <div className="bg-white/80 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-primary-dark" />
-              <span className="text-sm font-semibold">DPO {clampedDPO}</span>
+            <span className="text-2xl">{testInfo.icon}</span>
+            <div>
+              <p className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-0.5">Should I Test?</p>
+              <p className={`text-sm font-medium ${testInfo.color}`}>
+                {testInfo.message}
+              </p>
             </div>
-            <span className="text-xs text-text-muted">
-              {daysRemaining > 0
-                ? `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} to go`
-                : "Test day is here 🎉"}
-            </span>
           </div>
         </div>
-      </div>
 
-      {/* Progress bar */}
-      <div className="mb-6 relative z-10">
-        <div className="flex justify-between text-xs text-text-muted mb-2">
-          <span>Ovulation</span>
-          <span>Test Day</span>
-        </div>
-        <div className="h-2 bg-surface rounded-full overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-primary to-primary-dark rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Test Indicator */}
-      <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor} relative z-10`}>
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{testInfo.icon}</span>
-          <div>
-            <p className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-0.5">Should I Test?</p>
-            <p className={`text-sm font-medium ${testInfo.color}`}>
-              {testInfo.message}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Today's Body Guide */}
-      <button
-        onClick={() => navigate('/today')}
-        className="w-full text-left bg-white border border-gray-100 rounded-2xl p-5 mb-4 active:scale-[0.98] transition-all relative z-10 shadow-sm"
-      >
-        <div className="flex items-start justify-between">
-          <div className="flex-1 min-w-0 pr-3">
-            <p className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-1">Today's Guide</p>
-            <p className="font-semibold text-base mb-1">{content?.title}</p>
-            <p className="text-sm text-text-muted line-clamp-2">{content?.body}</p>
-          </div>
-          <ArrowRight className="w-5 h-5 text-text-muted shrink-0 mt-1" />
-        </div>
-      </button>
-
-      {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+        {/* Today's Body Guide */}
         <button
           onClick={() => navigate('/today')}
-          className="bg-primary/10 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
+          className="w-full text-left bg-white border border-gray-100 rounded-2xl p-5 mb-4 active:scale-[0.98] transition-all shadow-sm"
         >
-          <Heart className="w-5 h-5 text-primary-dark mb-2" />
-          <p className="font-semibold text-sm">Log Symptoms</p>
-          <p className="text-xs text-text-muted mt-0.5">How are you feeling?</p>
+          <div className="flex items-start justify-between">
+            <div className="flex-1 min-w-0 pr-3">
+              <p className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-1">Today's Guide</p>
+              <p className="font-semibold text-base mb-1">{content?.title}</p>
+              <p className="text-sm text-text-muted line-clamp-2">{content?.body}</p>
+            </div>
+            <ArrowRight className="w-5 h-5 text-text-muted shrink-0 mt-1" />
+          </div>
         </button>
-        <button
-          onClick={() => navigate('/chat')}
-          className="bg-secondary/20 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
-        >
-          <MessageCircle className="w-5 h-5 text-pink-500 mb-2" />
-          <p className="font-semibold text-sm">Community</p>
-          <p className="text-xs text-text-muted mt-0.5">You're not alone</p>
-        </button>
-      </div>
 
-      {/* Encouragement */}
-      <div className="bg-surface rounded-2xl p-4 text-center relative z-10">
-        <p className="text-sm text-text-muted italic">{encouragement}</p>
+        {/* Quick Actions */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <button
+            onClick={() => navigate('/today')}
+            className="bg-pink-50 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
+          >
+            <Heart className="w-5 h-5 text-pink-400 mb-2" />
+            <p className="font-semibold text-sm">Log Symptoms</p>
+            <p className="text-xs text-text-muted mt-0.5">How are you feeling?</p>
+          </button>
+          <button
+            onClick={() => navigate('/chat')}
+            className="bg-violet-50 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
+          >
+            <MessageCircle className="w-5 h-5 text-violet-500 mb-2" />
+            <p className="font-semibold text-sm">Community</p>
+            <p className="text-xs text-text-muted mt-0.5">You're not alone</p>
+          </button>
+        </div>
+
+        {/* Encouragement */}
+        <div className="bg-pink-50 rounded-2xl p-4 text-center mb-6">
+          <p className="text-sm text-text-muted italic">{encouragement}</p>
+        </div>
       </div>
     </div>
   );
