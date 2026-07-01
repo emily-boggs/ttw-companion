@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useTWW } from '../context/TWWContext';
 import { getTestReliability } from '../lib/testReliability';
 import { getEncouragement } from '../data/encouragements';
@@ -13,8 +13,7 @@ export default function Timeline() {
   const encouragement = getEncouragement(currentDPO);
 
   if (!ovulationDate) {
-    navigate('/');
-    return null;
+    return <Navigate to="/" replace />;
   }
 
   const days = Array.from({ length: 14 }, (_, i) => i + 1);
@@ -28,9 +27,9 @@ export default function Timeline() {
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-none mx-auto relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-4 right-4 w-8 h-8 bg-accent rounded-full opacity-40" />
+      <div className="absolute top-16 right-4 w-8 h-8 bg-accent rounded-full opacity-40" />
       <div className="absolute top-24 left-2 w-5 h-5 bg-secondary rounded-full opacity-30" />
-      <svg className="absolute top-12 right-16 w-4 h-4 text-primary opacity-40" viewBox="0 0 24 24" fill="currentColor">
+      <svg className="absolute top-20 right-16 w-4 h-4 text-primary opacity-40" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
       </svg>
 
@@ -121,10 +120,10 @@ export default function Timeline() {
                     {day}
                   </div>
                   <div className="min-w-0">
-                    <p className={`font-semibold text-sm ${isPast ? 'text-text-muted' : ''}`}>
-                      {content?.title || `DPO ${day}`}
-                      {isToday && <span className="ml-2 text-xs bg-primary/20 text-primary-dark px-2 py-0.5 rounded-full">Today</span>}
-                    </p>
+                    <div className={`flex items-center gap-2 flex-wrap font-semibold text-sm ${isPast ? 'text-text-muted' : ''}`}>
+                      <span>{content?.title || `DPO ${day}`}</span>
+                      {isToday && <span className="text-xs bg-primary/20 text-primary-dark px-2 py-0.5 rounded-full">Today</span>}
+                    </div>
                     <p className="text-xs text-text-muted truncate">{content?.keyEvent}</p>
                   </div>
                 </div>

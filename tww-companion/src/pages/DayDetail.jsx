@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { dpoContent } from '../data/dpoContent';
 import { getTestReliability } from '../lib/testReliability';
 import { useTWW } from '../context/TWWContext';
@@ -12,8 +12,7 @@ export default function DayDetail() {
   const testInfo = getTestReliability(dayNum);
 
   if (!content) {
-    navigate('/timeline');
-    return null;
+    return <Navigate to="/timeline" replace />;
   }
 
   const isToday = dayNum === currentDPO;
