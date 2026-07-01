@@ -26,6 +26,7 @@ export default function Timeline() {
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-none mx-auto relative overflow-hidden">
+      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
       {/* Decorative elements */}
       <div className="absolute top-16 right-4 w-8 h-8 bg-accent rounded-full opacity-40" />
       <div className="absolute top-24 left-2 w-5 h-5 bg-secondary rounded-full opacity-30" />

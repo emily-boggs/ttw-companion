@@ -3,7 +3,10 @@ import { useTWW } from '../context/TWWContext';
 import { dpoContent } from '../data/dpoContent';
 import { getTestReliability } from '../lib/testReliability';
 import { getEncouragement } from '../data/encouragements';
-import { Heart, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { Heart, MessageCircle, ArrowRight, Calendar } from 'lucide-react';
+import starPurple from '../assets/star-purple.svg';
+import starPink from '../assets/star-pink.svg';
+import emilyPic from '../assets/emily.jpg';
 
 export default function Home() {
   const { currentDPO, ovulationDate } = useTWW();
@@ -22,74 +25,80 @@ export default function Home() {
   const phase = getPhase(clampedDPO);
 
   return (
-    <div className="min-h-screen pb-24 md:pb-8">
-      {/* Full-bleed Hero */}
-      <div className="relative bg-pink-400 overflow-hidden px-6 pt-10 pb-24 md:px-12 md:pt-14 md:pb-28">
-        {/* Decorative circles */}
-        <div className="absolute -top-6 right--4 w-32 h-32 bg-amber-300/60 rounded-full" />
-        <div className="absolute top-1/2 -left-10 w-28 h-28 bg-violet-300/50 rounded-full" />
-        <div className="absolute bottom-16 left-16 w-4 h-4 bg-cyan-300 rounded-full" />
-        <div className="absolute top-20 right-1/3 w-3 h-3 bg-pink-200 rounded-full" />
+    <div className="min-h-screen pb-24 md:pb-8 relative">
+      {/* Soft gradient background */}
+      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
 
-        {/* Sparkle icons */}
-        <svg className="absolute top-8 left-16 w-5 h-5 text-amber-200/80" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
-        </svg>
-        <svg className="absolute bottom-20 right-12 w-6 h-6 text-indigo-500/70" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
-        </svg>
-        <svg className="absolute top-1/3 right-8 w-4 h-4 text-violet-400/60" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5z" />
-        </svg>
-
-        {/* Hero content */}
-        <div className="relative z-10 max-w-md">
-          <p className="text-white/80 text-sm font-medium mb-2">{phase.greeting}</p>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-            {phase.headline}
-          </h1>
-          <p className="text-white/80 text-base leading-relaxed max-w-sm">
-            {phase.subtext}
-          </p>
+      <div className="relative z-10 px-5 pt-8 md:px-8 md:pt-12 max-w-md mx-auto">
+        {/* Greeting header */}
+        <div className="inline-flex items-center gap-3 mb-8 bg-white/30 backdrop-blur-lg rounded-full pl-1.5 pr-5 py-1.5 border border-white/40 shadow-sm">
+          <img src={emilyPic} alt="Emily Boggs" className="w-10 h-10 rounded-full object-cover ring-2 ring-white/60" />
+          <span className="text-sm font-semibold">Emily Boggs</span>
         </div>
 
-        {/* Wavy bottom edge */}
-        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" preserveAspectRatio="none">
-          <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="white" />
-        </svg>
-      </div>
-
-      {/* Content below hero */}
-      <div className="px-5 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto -mt-4">
-        {/* DPO badge + progress */}
-        <div className="flex items-center gap-3 mb-5">
-          <div className="bg-white rounded-full px-4 py-2 flex items-center gap-2 shadow-md border border-gray-100">
-            <Sparkles className="w-4 h-4 text-pink-400" />
-            <span className="text-sm font-bold">DPO {clampedDPO}</span>
-          </div>
-          <span className="text-xs text-text-muted">
-            {daysRemaining > 0
-              ? `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} to go`
-              : "Test day is here 🎉"}
-          </span>
+        {/* Big headline question */}
+        <h1 className="font-serif text-4xl md:text-5xl font-bold text-text leading-tight mb-3">
+          Hi There! ✨ How Are You Feeling Today?
+        </h1>
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-200/80 to-violet-200/80 backdrop-blur-sm rounded-full px-3.5 py-1.5 mb-5">
+          <span className="text-xs font-bold text-text">DPO {clampedDPO}</span>
+          <span className="w-1 h-1 rounded-full bg-text" />
+          <span className="text-xs font-medium text-text">{daysRemaining > 0 ? `${daysRemaining} days to go` : "Test day! 🎉"}</span>
         </div>
 
         {/* Progress bar */}
-        <div className="mb-6">
-          <div className="flex justify-between text-xs text-text-muted mb-2">
-            <span>Ovulation</span>
-            <span>Test Day</span>
-          </div>
-          <div className="h-2.5 bg-pink-100 rounded-full overflow-hidden">
+        <div className="mb-8 bg-white/30 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/40 shadow-sm">
+          <div className="h-2.5 rounded-full overflow-hidden relative">
             <div
-              className="h-full bg-gradient-to-r from-pink-400 to-pink-500 rounded-full transition-all duration-500"
+              className="absolute inset-0 opacity-50"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(-45deg, transparent, transparent 3px, #9ca3af 3px, #9ca3af 5px)',
+              }}
+            />
+            <div
+              className="h-full bg-gradient-to-r from-pink-400 via-violet-400 to-purple-400 rounded-full transition-all duration-500 relative z-10"
               style={{ width: `${progress}%` }}
             />
           </div>
+          <div className="flex justify-between text-[10px] text-text-muted mt-2">
+            <span>Ovulation</span>
+            <span>Test Day</span>
+          </div>
+        </div>
+
+        {/* Quick categories row */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <button
+            onClick={() => navigate('/today')}
+            className="bg-white/40 backdrop-blur-md rounded-2xl py-3 flex flex-col items-center gap-1.5 shadow-sm border border-white/50 active:scale-95 transition-all"
+          >
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-200 to-pink-400 flex items-center justify-center shadow-sm">
+              <Heart className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xs font-medium">Symptoms</span>
+          </button>
+          <button
+            onClick={() => navigate('/timeline')}
+            className="bg-white/40 backdrop-blur-md rounded-2xl py-3 flex flex-col items-center gap-1.5 shadow-sm border border-white/50 active:scale-95 transition-all"
+          >
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center shadow-sm">
+              <Calendar className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xs font-medium">Timeline</span>
+          </button>
+          <button
+            onClick={() => navigate('/chat')}
+            className="bg-white/40 backdrop-blur-md rounded-2xl py-3 flex flex-col items-center gap-1.5 shadow-sm border border-white/50 active:scale-95 transition-all"
+          >
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-200 to-amber-400 flex items-center justify-center shadow-sm">
+              <MessageCircle className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xs font-medium">Community</span>
+          </button>
         </div>
 
         {/* Test Indicator */}
-        <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor}`}>
+        <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 mb-4 shadow-sm border border-white/50">
           <div className="flex items-center gap-3">
             <span className="text-2xl">{testInfo.icon}</span>
             <div>
@@ -101,14 +110,20 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Today's Body Guide */}
+        {/* Today's Guide */}
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-serif text-lg font-bold">Today's Guide</h2>
+          <button onClick={() => navigate('/today')} className="text-xs text-violet-500 font-medium">
+            See All
+          </button>
+        </div>
         <button
           onClick={() => navigate('/today')}
-          className="w-full text-left bg-white border border-gray-100 rounded-2xl p-5 mb-4 active:scale-[0.98] transition-all shadow-sm"
+          className="w-full text-left bg-white/40 backdrop-blur-md rounded-2xl p-5 mb-6 active:scale-[0.98] transition-all shadow-sm border border-white/50 relative overflow-hidden"
         >
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-pink-400 to-violet-400 rounded-l-2xl" />
           <div className="flex items-start justify-between">
             <div className="flex-1 min-w-0 pr-3">
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-1">Today's Guide</p>
               <p className="font-semibold text-base mb-1">{content?.title}</p>
               <p className="text-sm text-text-muted line-clamp-2">{content?.body}</p>
             </div>
@@ -116,30 +131,8 @@ export default function Home() {
           </div>
         </button>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <button
-            onClick={() => navigate('/today')}
-            className="bg-pink-50 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
-          >
-            <Heart className="w-5 h-5 text-pink-400 mb-2" />
-            <p className="font-semibold text-sm">Log Symptoms</p>
-            <p className="text-xs text-text-muted mt-0.5">How are you feeling?</p>
-          </button>
-          <button
-            onClick={() => navigate('/chat')}
-            className="bg-violet-50 rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
-          >
-            <MessageCircle className="w-5 h-5 text-violet-500 mb-2" />
-            <p className="font-semibold text-sm">Community</p>
-            <p className="text-xs text-text-muted mt-0.5">You're not alone</p>
-          </button>
-        </div>
-
         {/* Encouragement */}
-        <div className="bg-pink-50 rounded-2xl p-4 text-center mb-6">
-          <p className="text-sm text-text-muted italic">{encouragement}</p>
-        </div>
+        <p className="text-sm text-text-muted italic text-center mb-6">{encouragement}</p>
       </div>
     </div>
   );

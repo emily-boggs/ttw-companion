@@ -17,6 +17,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 relative overflow-hidden">
+      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
       {/* Decorative elements */}
       <div className="absolute top-8 left-6 w-12 h-12 bg-accent rounded-full opacity-60" />
       <div className="absolute top-20 right-8 w-6 h-6 bg-primary rounded-full opacity-50" />

@@ -21,6 +21,7 @@ export default function DayDetail() {
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
+      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
       {/* Decorative elements */}
       <div className="absolute top-6 right-6 w-10 h-10 bg-accent rounded-full opacity-30 hidden md:block" />
       <div className="absolute top-20 right-20 w-5 h-5 bg-secondary rounded-full opacity-40 hidden md:block" />

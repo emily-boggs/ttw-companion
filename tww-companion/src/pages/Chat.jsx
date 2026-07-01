@@ -84,7 +84,8 @@ export default function Chat() {
     }
 
     return (
-      <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto">
+      <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
+        <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
         <button
           onClick={() => setExpandedPost(null)}
           className="flex items-center gap-2 text-text-muted text-sm mb-6 active:opacity-70 min-h-[44px]"
@@ -160,7 +161,8 @@ export default function Chat() {
 
   // Feed view
   return (
-    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto">
+    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
+      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-serif text-2xl font-bold">Community</h1>
