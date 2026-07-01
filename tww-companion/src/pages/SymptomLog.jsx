@@ -41,7 +41,10 @@ export default function SymptomLog() {
   };
 
   return (
-    <div className="min-h-screen px-5 py-6 max-w-md mx-auto pb-24">
+    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
+      {/* Decorative elements */}
+      <div className="absolute top-8 right-8 w-8 h-8 bg-primary rounded-full opacity-20 hidden md:block" />
+      <div className="absolute bottom-32 right-16 w-6 h-6 bg-accent rounded-full opacity-30 hidden md:block" />
       {/* Back button */}
       <button
         onClick={() => navigate('/timeline')}
@@ -56,7 +59,7 @@ export default function SymptomLog() {
       </div>
 
       {/* Symptom Chips */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6 md:gap-3">
         {symptomOptions.map((symptom) => {
           const isSelected = selected.includes(symptom.id);
           return (

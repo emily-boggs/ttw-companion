@@ -21,7 +21,10 @@ export default function DayDetail() {
   const symptoms = savedSymptoms ? JSON.parse(savedSymptoms) : null;
 
   return (
-    <div className="min-h-screen px-5 py-6 max-w-md mx-auto">
+    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
+      {/* Decorative elements */}
+      <div className="absolute top-6 right-6 w-10 h-10 bg-accent rounded-full opacity-30 hidden md:block" />
+      <div className="absolute top-20 right-20 w-5 h-5 bg-secondary rounded-full opacity-40 hidden md:block" />
       {/* Back button */}
       <button
         onClick={() => navigate('/timeline')}
@@ -44,21 +47,23 @@ export default function DayDetail() {
       </div>
 
       {/* Body Guide */}
-      <div className="bg-surface rounded-2xl p-5 mb-4">
-        <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">What's Happening</h2>
-        <p className="text-base leading-relaxed">
-          {content.body}
-        </p>
-      </div>
-
-      {/* Test Indicator */}
-      <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor}`}>
-        <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">Should I Test?</h2>
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{testInfo.icon}</span>
-          <p className={`text-sm font-medium ${testInfo.color}`}>
-            {testInfo.message}
+      <div className="md:grid md:grid-cols-2 md:gap-4">
+        <div className="bg-surface rounded-2xl p-5 mb-4">
+          <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">What's Happening</h2>
+          <p className="text-base leading-relaxed">
+            {content.body}
           </p>
+        </div>
+
+        {/* Test Indicator */}
+        <div className={`rounded-2xl p-4 mb-4 ${testInfo.bgColor} md:h-fit`}>
+          <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">Should I Test?</h2>
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">{testInfo.icon}</span>
+            <p className={`text-sm font-medium ${testInfo.color}`}>
+              {testInfo.message}
+            </p>
+          </div>
         </div>
       </div>
 

@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTWW } from '../context/TWWContext';
 import { getTestReliability } from '../lib/testReliability';
 import { getEncouragement } from '../data/encouragements';
+import { dpoContent } from '../data/dpoContent';
 
 export default function Timeline() {
-  const { currentDPO, ovulationDate } = useTWW();
+  const { currentDPO, ovulationDate, resetData } = useTWW();
   const navigate = useNavigate();
+  const [showReset, setShowReset] = useState(false);
   const testInfo = getTestReliability(currentDPO);
   const encouragement = getEncouragement(currentDPO);
 
@@ -17,10 +20,53 @@ export default function Timeline() {
   const days = Array.from({ length: 14 }, (_, i) => i + 1);
   const daysRemaining = Math.max(0, 14 - currentDPO);
 
+  const handleReset = () => {
+    resetData();
+    navigate('/');
+  };
+
   return (
-    <div className="min-h-screen px-5 py-6 pb-24 max-w-md mx-auto">
+    <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-none mx-auto relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-4 right-4 w-8 h-8 bg-accent rounded-full opacity-40" />
+      <div className="absolute top-24 left-2 w-5 h-5 bg-secondary rounded-full opacity-30" />
+      <svg className="absolute top-12 right-16 w-4 h-4 text-primary opacity-40" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
+      </svg>
+
+      {/* Settings button */}
+      <div className="flex justify-end mb-2 relative z-10">
+        <button
+          onClick={() => setShowReset(!showReset)}
+          className="text-text-muted text-sm px-3 py-1.5 rounded-full hover:bg-surface active:scale-95 transition-all"
+        >
+          ⚙️
+        </button>
+      </div>
+
+      {/* Reset confirmation */}
+      {showReset && (
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-4 shadow-sm relative z-10">
+          <p className="text-sm text-text mb-3">Start over with a new ovulation date?</p>
+          <div className="flex gap-2">
+            <button
+              onClick={handleReset}
+              className="flex-1 py-2.5 bg-red-50 text-red-600 font-medium rounded-full text-sm active:scale-95 min-h-[44px]"
+            >
+              Reset My Data
+            </button>
+            <button
+              onClick={() => setShowReset(false)}
+              className="flex-1 py-2.5 bg-surface text-text-muted font-medium rounded-full text-sm active:scale-95 min-h-[44px]"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-6 relative z-10">
         <p className="text-sm text-text-muted font-medium">You're on</p>
         <h1 className="font-serif text-3xl font-bold">
           DPO {Math.min(currentDPO, 14)}
@@ -33,7 +79,7 @@ export default function Timeline() {
       </div>
 
       {/* Test Indicator Banner */}
-      <div className={`rounded-2xl p-4 mb-6 ${testInfo.bgColor}`}>
+      <div className={`rounded-2xl p-4 mb-6 ${testInfo.bgColor} relative z-10`}>
         <div className="flex items-center gap-3">
           <span className="text-2xl">{testInfo.icon}</span>
           <p className={`text-sm font-medium ${testInfo.color}`}>
@@ -43,16 +89,17 @@ export default function Timeline() {
       </div>
 
       {/* Encouragement */}
-      <p className="text-center text-sm text-text-muted italic mb-6">
+      <p className="text-center text-sm text-text-muted italic mb-6 relative z-10">
         {encouragement}
       </p>
 
       {/* Timeline Cards */}
-      <div className="space-y-3">
+      <div className="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3 relative z-10">
         {days.map((day) => {
           const isToday = day === currentDPO;
           const isPast = day < currentDPO;
           const hasSymptoms = localStorage.getItem(`tww-symptoms-dpo-${day}`);
+          const content = dpoContent[day];
 
           return (
             <button
@@ -68,19 +115,20 @@ export default function Timeline() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
                     isToday ? 'bg-primary text-white' : isPast ? 'bg-gray-200 text-text-muted' : 'bg-surface text-text'
                   }`}>
                     {day}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className={`font-semibold text-sm ${isPast ? 'text-text-muted' : ''}`}>
-                      DPO {day}
+                      {content?.title || `DPO ${day}`}
                       {isToday && <span className="ml-2 text-xs bg-primary/20 text-primary-dark px-2 py-0.5 rounded-full">Today</span>}
                     </p>
+                    <p className="text-xs text-text-muted truncate">{content?.keyEvent}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   {hasSymptoms && <span className="w-2 h-2 bg-secondary rounded-full" />}
                   <span className="text-text-muted text-sm">→</span>
                 </div>
@@ -91,16 +139,6 @@ export default function Timeline() {
       </div>
 
       {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-5 py-3 flex justify-around max-w-md mx-auto">
-        <button onClick={() => navigate('/timeline')} className="flex flex-col items-center gap-1 text-primary-dark">
-          <span className="text-lg">📅</span>
-          <span className="text-xs font-medium">Timeline</span>
-        </button>
-        <button onClick={() => navigate('/log')} className="flex flex-col items-center gap-1 text-text-muted">
-          <span className="text-lg">📝</span>
-          <span className="text-xs font-medium">Log</span>
-        </button>
-      </div>
     </div>
   );
 }
