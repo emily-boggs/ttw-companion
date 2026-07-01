@@ -3,7 +3,7 @@ import { useTWW } from '../context/TWWContext';
 import { dpoContent } from '../data/dpoContent';
 import { getTestReliability } from '../lib/testReliability';
 import { getEncouragement } from '../data/encouragements';
-import { Heart, Calendar, MessageCircle, ArrowRight } from 'lucide-react';
+import { Heart, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Home() {
   const { currentDPO, ovulationDate } = useTWW();
@@ -19,6 +19,7 @@ export default function Home() {
   const encouragement = getEncouragement(clampedDPO);
   const daysRemaining = Math.max(0, 14 - currentDPO);
   const progress = Math.min((currentDPO / 14) * 100, 100);
+  const phase = getPhase(clampedDPO);
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
@@ -29,26 +30,46 @@ export default function Home() {
         <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
       </svg>
 
-      {/* Hero */}
-      <div className="text-center mb-8 relative z-10">
-        <p className="text-sm text-text-muted font-medium mb-1">Good {getTimeOfDay()}</p>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold mb-2">
-          DPO {clampedDPO}
-        </h1>
-        <p className="text-text-muted">
-          {daysRemaining > 0
-            ? `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} until test day`
-            : "It's time — you can test now 🎉"}
-        </p>
+      {/* Cozy Hero Card */}
+      <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl p-6 mb-6 relative z-10 overflow-hidden">
+        {/* Decorative shapes inside card */}
+        <div className="absolute top-3 right-4 w-16 h-16 bg-accent/20 rounded-full" />
+        <div className="absolute bottom-2 left-6 w-8 h-8 bg-primary/15 rounded-full" />
+        <svg className="absolute top-5 right-20 w-4 h-4 text-primary/30" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.4 5.7 21l2.3-7-6-4.6h7.6z" />
+        </svg>
+
+        <div className="relative">
+          <p className="text-sm text-text-muted font-medium mb-1">{phase.greeting}</p>
+          <h1 className="font-serif text-2xl md:text-3xl font-bold mb-2">
+            {phase.headline}
+          </h1>
+          <p className="text-sm text-text-muted leading-relaxed mb-4">
+            {phase.subtext}
+          </p>
+
+          {/* DPO + Progress inline */}
+          <div className="flex items-center gap-3">
+            <div className="bg-white/80 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-primary-dark" />
+              <span className="text-sm font-semibold">DPO {clampedDPO}</span>
+            </div>
+            <span className="text-xs text-text-muted">
+              {daysRemaining > 0
+                ? `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} to go`
+                : "Test day is here 🎉"}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Progress bar */}
-      <div className="mb-8 relative z-10">
+      <div className="mb-6 relative z-10">
         <div className="flex justify-between text-xs text-text-muted mb-2">
           <span>Ovulation</span>
           <span>Test Day</span>
         </div>
-        <div className="h-2.5 bg-surface rounded-full overflow-hidden">
+        <div className="h-2 bg-surface rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-primary to-primary-dark rounded-full transition-all duration-500"
             style={{ width: `${progress}%` }}
@@ -112,9 +133,38 @@ export default function Home() {
   );
 }
 
-function getTimeOfDay() {
-  const hour = new Date().getHours();
-  if (hour < 12) return 'morning';
-  if (hour < 17) return 'afternoon';
-  return 'evening';
+function getPhase(dpo) {
+  if (dpo <= 3) {
+    return {
+      greeting: '🌱 The early days',
+      headline: "Your journey has just begun",
+      subtext: "Things are happening deep within — even if you can't feel them yet. This is the quiet beginning of something potentially wonderful.",
+    };
+  }
+  if (dpo <= 5) {
+    return {
+      greeting: '🌿 Growing quietly',
+      headline: "Patience is your superpower",
+      subtext: "Cells are dividing and traveling. Your body knows exactly what to do. Take a breath — you're right on track.",
+    };
+  }
+  if (dpo <= 8) {
+    return {
+      greeting: '✨ The implantation window',
+      headline: "Something magical might be happening",
+      subtext: "This is when things could be settling in. Every little twinge has meaning, or none at all — and both are okay.",
+    };
+  }
+  if (dpo <= 11) {
+    return {
+      greeting: '🌸 The hopeful stretch',
+      headline: "You're more than halfway there",
+      subtext: "Hormones are building. You might feel things shifting — or nothing at all. Trust your body and be kind to yourself.",
+    };
+  }
+  return {
+    greeting: '🎉 Almost there',
+    headline: "The finish line is in sight",
+    subtext: "You made it through the hardest part. Whether you test today or wait — you've shown incredible strength.",
+  };
 }
