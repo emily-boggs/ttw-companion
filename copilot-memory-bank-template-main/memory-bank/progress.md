@@ -1,41 +1,52 @@
 # Progress
 
-_What’s done, what’s next, and current blockers._
+_What's done, what's next, and current blockers._
 ---
 
-## Status: 🟡 Not Started — Planning Complete
+## Status: MVP Complete
 
 ---
 
 ## What's Done
 
-- [x] Project brief written
-- [x] Memory bank files populated
-- [x] Design direction decided (white + colorful accents, serif headings, decorative elements)
-- [x] Tech stack confirmed (React 18 + Vite + Tailwind + shadcn/ui)
-- [x] Feature priority set (Timeline → Symptom Log → Body Guide → Test Indicator)
+- [x] Project scaffolding (Vite 5 + React 18 + Tailwind v4)
+- [x] Landing page — ovulation date picker
+- [x] TWW Timeline — 14-day card grid with symptom display
+- [x] Day-by-day body guide content (all 14 DPOs)
+- [x] "Should I Test?" indicator with reliability levels
+- [x] Daily symptom log with chip selection + optional notes
+- [x] DayDetail page with logged symptoms display
+- [x] Community/Chat page with posts, hearts, replies, delete
+- [x] Encouragement micro-copy system
+- [x] Glassmorphic design system (frosted cards, gradient bg, white nested cards)
+- [x] M3-style navigation rail (collapsed md, expanded lg)
+- [x] Floating pill bottom nav (mobile)
+- [x] Global top bar (profile pill + bell icon on all pages)
+- [x] Notifications bottom sheet (mobile) / modal (desktop)
+- [x] New post bottom sheet (mobile) / modal (desktop)
+- [x] Instagram-style heart interactions
+- [x] Responsive two-column layouts for tablet/desktop
+- [x] Profile dropdown (Edit Profile + Log Out)
+- [x] Quick Jump day grid in sidebar
+- [x] Deployed to Vercel
+- [x] README + MIT License
 
 ---
 
-## What's Next (MVP)
+## What's Next
 
 | # | Feature | Status |
 |---|---|---|
-| 1 | Project scaffolding (Vite + React + Tailwind + shadcn/ui) | ☐ Not started |
-| 2 | Landing page — ovulation date picker | ☐ Not started |
-| 3 | TWW Timeline — DPO countdown | ☐ Not started |
-| 4 | Day-by-day body guide content | ☐ Not started |
-| 5 | "Should I Test?" indicator | ☐ Not started |
-| 6 | Daily symptom log | ☐ Not started |
-| 7 | Encouragement micro-copy | ☐ Not started |
-| 8 | Decorative elements & polish | ☐ Not started |
-| 9 | Deploy to Vercel | ☐ Not started |
+| 1 | TWW-branded favicon | Not started |
+| 2 | Final responsive QA pass | In progress |
+| 3 | Landing page design refresh | Not started |
 
 ---
 
-## Known Issues / Blockers
+## Known Issues
 
-- None yet — ready to start building.
+- `showReset` on Timeline lost its trigger button (settings gear removed) — needs new home
+- DPO values in notifications show negative when ovulation is in future
 
 ---
 
@@ -44,5 +55,4 @@ _What’s done, what’s next, and current blockers._
 - User accounts / authentication
 - Backend / database
 - Push notifications
-- Social features
 - Medical advice or diagnosis

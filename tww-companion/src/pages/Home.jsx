@@ -4,8 +4,6 @@ import { dpoContent } from '../data/dpoContent';
 import { getTestReliability } from '../lib/testReliability';
 import { getEncouragement } from '../data/encouragements';
 import { Heart, MessageCircle, ArrowRight, Calendar } from 'lucide-react';
-import starPurple from '../assets/star-purple.svg';
-import starPink from '../assets/star-pink.svg';
 
 export default function Home() {
   const { currentDPO, ovulationDate } = useTWW();

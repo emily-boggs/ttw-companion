@@ -6,10 +6,9 @@ _Current focus, decisions, and work in progress._
 
 ## Current Focus
 
-**Phase:** Project initialization — scaffolding the app and building the first feature.
+**Phase:** MVP complete — responsive polish and deployment.
 
-**Priority Feature:** TWW Timeline
-- User enters ovulation date → gets personalized day-by-day countdown (DPO 1–14)
+**Status:** App is fully functional with all core features built. Currently refining responsive layouts for tablet/desktop.
 
 ---
 
@@ -17,37 +16,26 @@ _Current focus, decisions, and work in progress._
 
 | Decision | Chosen | Rationale |
 |---|---|---|
-| Design direction | White bg + colorful accents + playful elements | Per design reference — modern, warm, distinct from clinical apps |
-| Typography | Expressive serif for headings, sans-serif for body | Adds personality and visual hierarchy |
-| Decorative elements | Yes — stars, sparkles, abstract shapes | Warmth and friendliness |
-| First feature | TWW Timeline | Core value prop — everything else builds on this |
-| Working style | Ask before major decisions | User preference |
+| Design system | Glassmorphism with blue/indigo/violet palette | Modern, warm, emotionally supportive aesthetic |
+| Typography | Fraunces (serif) headlines + Nunito body | Personality + readability |
+| Navigation | M3-style rail (desktop) + floating pill (mobile) | Responsive, space-efficient, modern |
+| Profile/Bell | Global in AppLayout (all pages) | Consistent UX across all routes |
+| New post UI | Bottom sheet (mobile) / centered modal (desktop) | Platform-appropriate interaction |
+| Community hearts | Instagram-style toggle (red filled / outline) | Familiar, intuitive interaction |
+| Page layouts | Two-column grids on md+, full-width | Purposeful desktop design, not stretched mobile |
 
 ---
 
-## Active Design Reference
+## Deployment
 
-- Mentee-style layout: white background, card-based, rounded corners, decorative shapes
-- Bold CTA buttons (dark/pill-shaped)
-- Generous whitespace, playful but clean
-- Colorful accents (lavender, pink, yellow) rather than full pastel backgrounds
-
----
-
-## Next Steps
-
-1. ☐ Scaffold Vite + React project
-2. ☐ Install dependencies (Tailwind, shadcn/ui, date-fns, React Router, Lucide)
-3. ☐ Set up fonts (Playfair Display + Nunito/Poppins)
-4. ☐ Build landing page — ovulation date input
-5. ☐ Build TWW Timeline view — day-by-day countdown
-6. ☐ Add DPO content data (what's happening in the body each day)
-7. ☐ Add "Should I Test?" indicator logic
-8. ☐ Build symptom logging
-9. ☐ Polish — decorative elements, micro-copy, responsive tweaks
+- **Live Site:** https://ttw-companion.vercel.app/
+- **Repo:** https://github.com/emily-boggs/ttw-companion
+- **License:** MIT
 
 ---
 
-## Deadline
+## What's Left
 
-**End of week (July 4, 2026)** — MVP must be functional and deployed.
+- Favicon (TWW branded)
+- Final QA pass on all breakpoints
+- Landing page may need updating to match new design system
