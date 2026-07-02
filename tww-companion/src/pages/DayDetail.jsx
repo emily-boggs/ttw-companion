@@ -21,7 +21,7 @@ export default function DayDetail() {
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
       {/* Decorative elements */}
       <div className="absolute top-6 right-6 w-10 h-10 bg-accent rounded-full opacity-30 hidden md:block" />
       <div className="absolute top-20 right-20 w-5 h-5 bg-secondary rounded-full opacity-40 hidden md:block" />
@@ -36,7 +36,7 @@ export default function DayDetail() {
       {/* Day header */}
       <div className="text-center mb-6">
         <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full mb-3 ${
-          isToday ? 'bg-primary text-white' : 'bg-surface text-text'
+          isToday ? 'bg-primary text-white' : 'bg-white/40 text-text'
         }`}>
           <span className="text-xl font-bold">{dayNum}</span>
         </div>
@@ -48,7 +48,7 @@ export default function DayDetail() {
 
       {/* Body Guide */}
       <div className="md:grid md:grid-cols-2 md:gap-4">
-        <div className="bg-surface rounded-2xl p-5 mb-4">
+        <div className="bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm p-5 mb-4">
           <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">What's Happening</h2>
           <p className="text-base leading-relaxed">
             {content.body}
@@ -69,7 +69,7 @@ export default function DayDetail() {
 
       {/* Symptoms logged */}
       {symptoms && (
-        <div className="bg-white border border-gray-100 rounded-2xl p-4 mb-4">
+        <div className="bg-white border border-white/40 rounded-2xl p-4 mb-4">
           <h2 className="font-semibold text-sm text-text-muted mb-2 uppercase tracking-wide">You Logged</h2>
           <div className="flex flex-wrap gap-2">
             {symptoms.selected && symptoms.selected.map((s) => (

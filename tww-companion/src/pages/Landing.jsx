@@ -17,7 +17,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 relative overflow-hidden">
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
       {/* Decorative elements */}
       <div className="absolute top-8 left-6 w-12 h-12 bg-accent rounded-full opacity-60" />
       <div className="absolute top-20 right-8 w-6 h-6 bg-primary rounded-full opacity-50" />
@@ -54,7 +54,7 @@ export default function Landing() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-surface text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-3 rounded-2xl border border-white/50 bg-white/40 backdrop-blur-md text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               required
             />
             <p className="text-xs text-text-muted mt-2">

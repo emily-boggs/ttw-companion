@@ -48,7 +48,7 @@ export default function Today() {
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
       {/* Header */}
       <div className="text-center mb-6">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white mb-3">
@@ -59,7 +59,7 @@ export default function Today() {
       </div>
 
       {/* Body Guide */}
-      <div className="bg-surface rounded-2xl p-5 mb-4">
+      <div className="bg-white/40 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm p-5 mb-4">
         <h2 className="font-semibold text-xs text-text-muted mb-2 uppercase tracking-wide">What's Happening Today</h2>
         <p className="text-base leading-relaxed">{content?.body}</p>
       </div>
@@ -73,7 +73,7 @@ export default function Today() {
       </div>
 
       {/* Symptom Log Section */}
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-white/40 pt-6">
         <h2 className="font-serif text-xl font-bold mb-4">How are you feeling?</h2>
 
         {/* Symptom Chips */}
@@ -87,7 +87,7 @@ export default function Today() {
                 className={`px-4 py-2.5 rounded-full text-sm font-medium transition-all active:scale-95 min-h-[44px] ${
                   isSelected
                     ? 'bg-primary text-white shadow-sm'
-                    : 'bg-surface border border-gray-200 text-text'
+                    : 'bg-white/40 backdrop-blur-sm border border-white/50 text-text'
                 }`}
               >
                 {symptom.emoji} {symptom.label}
@@ -107,7 +107,7 @@ export default function Today() {
             onChange={(e) => { setNote(e.target.value); setSaved(false); }}
             placeholder="How are you really feeling today..."
             rows={3}
-            className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-surface text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+            className="w-full px-4 py-3 rounded-2xl border border-white/50 bg-white/40 backdrop-blur-md text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
           />
         </div>
 

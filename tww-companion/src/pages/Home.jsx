@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="min-h-screen pb-24 md:pb-8 relative">
       {/* Soft gradient background */}
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
 
       <div className="relative z-10 px-5 pt-8 md:px-8 md:pt-12 max-w-md mx-auto">
         {/* Greeting header */}

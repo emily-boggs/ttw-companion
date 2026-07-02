@@ -26,7 +26,7 @@ export default function Timeline() {
 
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-none mx-auto relative overflow-hidden">
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
       {/* Decorative elements */}
       <div className="absolute top-16 right-4 w-8 h-8 bg-accent rounded-full opacity-40" />
       <div className="absolute top-24 left-2 w-5 h-5 bg-secondary rounded-full opacity-30" />
@@ -38,7 +38,7 @@ export default function Timeline() {
       <div className="flex justify-end mb-2 relative z-10">
         <button
           onClick={() => setShowReset(!showReset)}
-          className="text-text-muted text-sm px-3 py-1.5 rounded-full hover:bg-surface active:scale-95 transition-all"
+          className="text-text-muted text-sm px-3 py-1.5 rounded-full hover:bg-white/30 active:scale-95 transition-all"
         >
           ⚙️
         </button>
@@ -46,7 +46,7 @@ export default function Timeline() {
 
       {/* Reset confirmation */}
       {showReset && (
-        <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-4 shadow-sm relative z-10">
+        <div className="bg-white border border-white/50 rounded-2xl p-4 mb-4 shadow-sm relative z-10">
           <p className="text-sm text-text mb-3">Start over with a new ovulation date?</p>
           <div className="flex gap-2">
             <button
@@ -57,7 +57,7 @@ export default function Timeline() {
             </button>
             <button
               onClick={() => setShowReset(false)}
-              className="flex-1 py-2.5 bg-surface text-text-muted font-medium rounded-full text-sm active:scale-95 min-h-[44px]"
+              className="flex-1 py-2.5 bg-white/40 text-text-muted font-medium rounded-full text-sm active:scale-95 min-h-[44px]"
             >
               Cancel
             </button>
@@ -109,14 +109,14 @@ export default function Timeline() {
                 isToday
                   ? 'border-primary bg-white shadow-md ring-2 ring-primary/30'
                   : isPast
-                  ? 'border-gray-100 bg-surface opacity-75'
-                  : 'border-gray-100 bg-white'
+                  ? 'border-white/40 bg-white/40 opacity-75'
+                  : 'border-white/40 bg-white'
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
-                    isToday ? 'bg-primary text-white' : isPast ? 'bg-gray-200 text-text-muted' : 'bg-surface text-text'
+                    isToday ? 'bg-primary text-white' : isPast ? 'bg-white/50 text-text-muted' : 'bg-white/40 text-text'
                   }`}>
                     {day}
                   </div>

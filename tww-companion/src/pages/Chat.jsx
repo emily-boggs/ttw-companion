@@ -85,7 +85,7 @@ export default function Chat() {
 
     return (
       <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
-        <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+        <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
         <button
           onClick={() => setExpandedPost(null)}
           className="flex items-center gap-2 text-text-muted text-sm mb-6 active:opacity-70 min-h-[44px]"
@@ -94,11 +94,11 @@ export default function Chat() {
         </button>
 
         {/* Original post */}
-        <div className="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+        <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-5 mb-4 shadow-sm">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-lg">{post.avatar}</span>
             <span className="font-semibold text-sm">{post.author}</span>
-            {post.dpo && <span className="text-xs text-text-muted bg-surface px-2 py-0.5 rounded-full">DPO {post.dpo}</span>}
+            {post.dpo && <span className="text-xs text-text-muted bg-white/40 px-2 py-0.5 rounded-full">DPO {post.dpo}</span>}
             <span className="text-xs text-text-muted ml-auto">{post.timestamp}</span>
           </div>
           <p className="text-base leading-relaxed mb-3">{post.content}</p>
@@ -120,7 +120,7 @@ export default function Chat() {
         {/* Replies */}
         <div className="space-y-3 mb-4">
           {post.replies.map((reply) => (
-            <div key={reply.id} className="bg-surface rounded-2xl p-4 ml-4">
+            <div key={reply.id} className="bg-white/30 backdrop-blur-sm rounded-2xl border border-white/40 p-4 ml-4">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm">{reply.avatar}</span>
                 <span className="font-semibold text-xs">{reply.author}</span>
@@ -145,7 +145,7 @@ export default function Chat() {
             onChange={(e) => setReplyContent(e.target.value)}
             placeholder="Write a supportive reply..."
             rows={2}
-            className="flex-1 px-4 py-3 rounded-2xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+            className="flex-1 px-4 py-3 rounded-2xl border border-white/50 bg-white/40 backdrop-blur-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
           />
           <button
             onClick={() => handleReply(post.id)}
@@ -162,7 +162,7 @@ export default function Chat() {
   // Feed view
   return (
     <div className="min-h-screen px-5 py-6 pb-24 md:pb-8 md:px-8 lg:px-12 max-w-md md:max-w-2xl mx-auto relative">
-      <div className="fixed inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/40 to-violet-200/50 pointer-events-none -z-10" />
+      <div className="fixed inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse at 15% 0%, rgba(125,211,252,0.9) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(147,197,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 50% 40%, rgba(165,180,252,0.6) 0%, transparent 50%), radial-gradient(ellipse at 10% 70%, rgba(196,181,253,0.7) 0%, transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(167,139,250,0.7) 0%, transparent 45%), #e0e7ff" }} />
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-serif text-2xl font-bold">Community</h1>
@@ -183,7 +183,7 @@ export default function Chat() {
             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap min-h-[44px] transition-all ${
               sortBy === option
                 ? 'bg-cta text-white'
-                : 'bg-surface text-text-muted'
+                : 'bg-white/30 backdrop-blur-sm text-text-muted'
             }`}
           >
             {option === 'recent' && 'Recent'}
@@ -195,14 +195,14 @@ export default function Chat() {
 
       {/* New post modal */}
       {showNewPost && (
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-5 shadow-md">
+        <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-5 mb-5 shadow-md">
           <h3 className="font-semibold text-sm mb-3">Share with the community</h3>
           <textarea
             value={newPostContent}
             onChange={(e) => setNewPostContent(e.target.value)}
             placeholder="What's on your mind? Share a thought, question, or encouragement..."
             rows={4}
-            className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none mb-3"
+            className="w-full px-4 py-3 rounded-2xl border border-white/50 bg-white/40 backdrop-blur-md/40 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none mb-3"
             autoFocus
           />
           <div className="flex gap-2">
@@ -215,7 +215,7 @@ export default function Chat() {
             </button>
             <button
               onClick={() => { setShowNewPost(false); setNewPostContent(''); }}
-              className="px-6 py-3 bg-surface text-text-muted font-medium rounded-full text-sm active:scale-[0.98] transition-all min-h-[44px]"
+              className="px-6 py-3 bg-white/30 backdrop-blur-sm text-text-muted font-medium rounded-full text-sm active:scale-[0.98] transition-all min-h-[44px]"
             >
               Cancel
             </button>
@@ -229,12 +229,12 @@ export default function Chat() {
           <button
             key={post.id}
             onClick={() => setExpandedPost(post.id)}
-            className="w-full text-left bg-white border border-gray-100 rounded-2xl p-5 active:scale-[0.98] transition-all shadow-sm"
+            className="w-full text-left bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-5 active:scale-[0.98] transition-all shadow-sm"
           >
             <div className="flex items-center gap-2 mb-3">
               <span className="text-lg">{post.avatar}</span>
               <span className="font-semibold text-sm">{post.author}</span>
-              {post.dpo && <span className="text-xs text-text-muted bg-surface px-2 py-0.5 rounded-full">DPO {post.dpo}</span>}
+              {post.dpo && <span className="text-xs text-text-muted bg-white/40 px-2 py-0.5 rounded-full">DPO {post.dpo}</span>}
               <span className="text-xs text-text-muted ml-auto">{post.timestamp}</span>
             </div>
             <p className="text-sm leading-relaxed mb-3 line-clamp-3">{post.content}</p>

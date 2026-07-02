@@ -24,7 +24,7 @@ export default function AppLayout({ children }) {
   return (
     <div className="min-h-screen md:flex">
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col md:w-64 lg:w-72 md:fixed md:inset-y-0 md:left-0 bg-white border-r border-gray-100 px-5 py-8">
+      <aside className="hidden md:flex md:flex-col md:w-64 lg:w-72 md:fixed md:inset-y-0 md:left-0 bg-white border-r border-white/40 px-5 py-8">
         {/* Logo / Title */}
         <button onClick={() => navigate('/home')} className="mb-8 text-left">
           <h2 className="font-serif text-xl font-bold">TWW Companion</h2>
@@ -46,7 +46,7 @@ export default function AppLayout({ children }) {
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all min-h-[44px] ${
                   isActive
                     ? 'bg-primary/10 text-primary-dark font-semibold'
-                    : 'text-text-muted hover:bg-surface'
+                    : 'text-text-muted hover:bg-white/30'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -72,7 +72,7 @@ export default function AppLayout({ children }) {
                           ? 'bg-primary text-white'
                           : isToday
                           ? 'bg-primary/20 text-primary-dark ring-1 ring-primary'
-                          : 'bg-surface text-text-muted hover:bg-gray-200'
+                          : 'bg-white/40 text-text-muted hover:bg-gray-200'
                       }`}
                     >
                       {day}
