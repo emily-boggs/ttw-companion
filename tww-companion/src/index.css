@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Quicksand", sans-serif;
+  --font-serif: "Fraunces", serif;
   --font-sans: "Nunito", sans-serif;
 
   --color-primary: #C4B5FD;
@@ -9,7 +9,7 @@
   --color-secondary: #FBCFE8;
   --color-accent: #FDE68A;
   --color-surface: #FAFAFA;
-  --color-cta: #1F2937;
+  --color-cta: #6366F1;
   --color-text: #1F2937;
   --color-text-muted: #6B7280;
 }
@@ -20,4 +20,13 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
 }
