@@ -134,7 +134,7 @@ export default function Home() {
           </div>
 
           {/* Encouragement */}
-          <p className="text-sm text-text italic text-center md:text-left mt-4 md:col-span-2 lg:col-span-3">{encouragement}</p>
+          <p className="text-sm text-text italic text-center md:text-left mt-2 md:col-span-2 lg:col-span-3">{encouragement}</p>
         </div>
       </div>
     </div>

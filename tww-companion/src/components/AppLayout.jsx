@@ -122,7 +122,7 @@ export default function AppLayout({ children }) {
       {/* Main Content */}
       <main className="flex-1 md:ml-20 lg:ml-64 relative">
         {/* Top bar: profile + bell */}
-        <div className="sticky top-0 z-30 px-5 pt-4 pb-4 md:px-8 lg:px-12 flex items-center justify-between">
+        <div className="sticky top-0 z-30 px-5 pt-[32px] pb-4 md:px-8 lg:px-12 flex items-center justify-between">
           <button onClick={() => setShowProfile(!showProfile)} className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-lg rounded-full pl-1 pr-4 py-1 border border-white/40 shadow-sm active:scale-95 transition-transform">
             <img src={emilyPic} alt="Emily Boggs" className="w-8 h-8 rounded-full object-cover ring-2 ring-white/60" />
             <span className="text-xs font-semibold">Emily Boggs</span>
